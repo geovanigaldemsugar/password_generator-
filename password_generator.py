@@ -6,6 +6,20 @@ import os
 begin = False
 clearconsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
 
+class Error(Exception):
+    """ Base class for other exceptions"""
+
+
+class WrongInput(Error):
+    """ raised when there is a wrong input""" 
+    pass
+
+
+
+
+
+
+
 
 while True:
 
@@ -67,11 +81,27 @@ while True:
             print(f'Your password is: {password}')
             print('-----------------------------')
             pass_should_be_saved = input('Do want your password to be saved (y/n):').lower()
-     
+            
+            while True:
+                try:
+                    if pass_should_be_saved == 'y' or pass_should_be_saved == 'yes':
+                        print('-----------------------------')
+                        for_what_app = input('Which app or website do you want to save it for:')
 
-            if pass_should_be_saved == 'y' or pass_should_be_saved == 'yes':
-               save_file(password)
-          
+                        save_file(for_what_app + ': ' + password)
+                        break
+
+                    elif pass_should_be_saved == 'n' or pass_should_be_saved == 'no':
+                        break
+
+                    else:
+                        raise WrongInput
+
+                except WrongInput:
+                    clearconsole()
+                    print('-----------------------------')
+                    pass_should_be_saved =  input('Please enter an valid input either (y/n):')
+
                 
             print('-----------------------------')
             print('Thank you for using genna the password generator')
