@@ -1,3 +1,3 @@
 #password generator 
 
-this is a fun project i wanted to try i had a blast making it
+this is a fun and simple project i wanted to try i had a blast making it
